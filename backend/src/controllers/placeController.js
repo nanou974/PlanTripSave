@@ -1,43 +1,45 @@
 const pool = require('../config/database');
 
-const getPlaces = async (req, res) => {
+exports.getAllPlaces = async (req, res) => {
     try {
-        const { lat, lon, radius = 50, type, page = 1, limit = 20 } = req.query;
-        const offset = (parseInt(page) - 1) * parseInt(limit);
-
-        let query = 'SELECT * FROM places WHERE is_validated = true';
-        const params = [];
-
-        if (type) {
-            query += ' AND type = $' + (params.length + 1);
-            params.push(type);
-        }
-
-        query += ` ORDER BY created_at DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
-        params.push(limit, offset);
-
-        const result = await pool.query(query, params);
+        const result = await pool.query('SELECT * FROM places WHERE is_validated = true');
         res.json(result.rows);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erreur serveur' });
+        res.status(500).json({ error: error.message });
     }
 };
 
-const createPlace = async (req, res) => {
+exports.getPlaceById = async (req, res) => {
     try {
-        const { name, description, type, latitude, longitude } = req.body;
-
-        const result = await pool.query(
-            'INSERT INTO places (name, description, type, latitude, longitude, is_validated) VALUES ($1, $2, $3, $4, $5, false) RETURNING *',
-            [name, description, type, latitude, longitude]
+        const { id } = req.params;
+        const placeResult = await pool.query('SELECT * FROM places WHERE id = $1', [id]);
+        
+        if (placeResult.rows.length === 0) {
+            return res.status(404).json({ error: 'Place non trouvée' });
+        }
+        
+        const reviewsResult = await pool.query(
+            'SELECT * FROM reviews WHERE place_id = $1 AND is_approved = true',
+            [id]
         );
-
-        res.status(201).json({ message: 'Lieu créé en attente de validation', place: result.rows[0] });
+        
+        res.json({ place: placeResult.rows[0], reviews: reviewsResult.rows });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erreur serveur' });
+        res.status(500).json({ error: error.message });
     }
 };
 
-module.exports = { getPlaces, createPlace };
+exports.addPlaceToTrip = async (req, res) => {
+    try {
+        const { trip_id, place_id, order_in_trip, estimated_cost } = req.body;
+        
+        const result = await pool.query(
+            'INSERT INTO trip_places (trip_id, place_id, order_in_trip, estimated_cost) VALUES ($1, $2, $3, $4) RETURNING *',
+            [trip_id, place_id, order_in_trip, estimated_cost]
+        );
+        
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

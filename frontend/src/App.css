@@ -1,38 +1,72 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar {
-  background-color: #2c3e50;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.home-page {
+  padding: 2rem;
+  text-align: center;
 }
 
-.navbar a {
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.trip-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.trip-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.trip-card a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
   color: white;
   text-decoration: none;
-  margin: 0 1rem;
+  border-radius: 4px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.btn {
-  padding: 0.75rem 1.5rem;
-  background-color: #3498db;
+.login-page form {
+  border: 1px solid #ddd;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.login-page input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.login-page button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
-}
-
-.btn:hover {
-  background-color: #2980b9;
 }
