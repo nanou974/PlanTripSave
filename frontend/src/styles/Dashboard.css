@@ -1,0 +1,15 @@
+.dashboard-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.dashboard-container h1 { color: #333; margin-bottom: 30px; }
+.form-section { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); margin-bottom: 40px; }
+.form-section form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.form-section input { padding: 12px; border: 1px solid #ddd; border-radius: 4px; }
+.form-section button { padding: 12px 25px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+.form-section button:hover { background: #0056b3; }
+.trips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.trip-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
+.trip-card h3 { color: #333; margin-bottom: 10px; }
+.trip-card p { color: #666; margin: 5px 0; }
+.card-actions { display: flex; gap: 10px; margin-top: 15px; }
+.btn-primary, .btn-danger { flex: 1; padding: 10px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; text-align: center; }
+.btn-primary { background: #28a745; color: white; }
+.btn-danger { background: #dc3545; color: white; }

@@ -1,0 +1,14 @@
+.budget-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.budget-container h1 { color: #333; margin-bottom: 30px; }
+.budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.expenses-section, .expenses-list-section { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
+.expenses-section h2, .expenses-list-section h2 { color: #555; margin-bottom: 20px; }
+.expenses-section form { display: flex; flex-direction: column; gap: 12px; }
+.expenses-section select, .expenses-section input { padding: 12px; border: 1px solid #ddd; border-radius: 4px; }
+.expenses-section button { padding: 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+.expenses-list { list-style: none; padding: 0; }
+.expense-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; gap: 15px; }
+.expense-item strong { color: #333; display: block; margin-bottom: 5px; }
+.expense-item p { color: #666; margin: 0; }
+.expense-actions { display: flex; align-items: center; gap: 15px; }
+.expense-actions .amount { font-weight: bold; color: #dc3545; }

@@ -1,16 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import TripDetailsPage from './pages/TripDetailsPage';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import TripPlanner from './pages/TripPlanner';
+import BudgetTracker from './pages/BudgetTracker';
 import './App.css';
 
 function App() {
+  const token = localStorage.getItem('token');
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/trip/:id" element={<TripDetailsPage />} />
+        <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/trip/:tripId" element={token ? <TripPlanner /> : <Navigate to="/login" />} />
+        <Route path="/trip/:tripId/budget" element={token ? <BudgetTracker /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
       </Routes>
     </Router>
   );
